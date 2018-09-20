@@ -8,5 +8,45 @@ namespace GradeBook.GradeBooks
         {
             Type = GradeBookType.Ranked;
         }
+
+        public override char GetLetterGrade(double averageGrade)
+        {
+            int numberOfStudents;
+            double minAverageGrade = 100;
+            double maxAverageGrade = 0;
+            double rankInterval;
+
+            numberOfStudents = Students.Count;
+            if (numberOfStudents < 5)
+            {
+                throw new System.InvalidOperationException("Ranked grading requires at least five students in the class.");
+            }
+
+            foreach (Student student in Students)
+            {
+                if (student.AverageGrade < minAverageGrade)
+                {
+                    minAverageGrade = student.AverageGrade;
+                }
+
+                if (student.AverageGrade > maxAverageGrade)
+                {
+                    maxAverageGrade = student.AverageGrade;
+                }
+            }
+
+            rankInterval = (maxAverageGrade - minAverageGrade) / numberOfStudents;
+
+            if ((maxAverageGrade - rankInterval) < averageGrade)
+                return 'A';
+            else if ((maxAverageGrade - rankInterval * 2) < averageGrade)
+                return 'B';
+            else if ((maxAverageGrade - rankInterval * 3) < averageGrade)
+                return 'C';
+            else if ((maxAverageGrade - rankInterval * 4) < averageGrade)
+                return 'D';
+            else
+                return 'F';
+        }
     }
 }
