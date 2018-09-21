@@ -1,4 +1,5 @@
-﻿using GradeBook.Enums;
+﻿using System;
+using GradeBook.Enums;
 
 namespace GradeBook.GradeBooks
 {
@@ -16,7 +17,9 @@ namespace GradeBook.GradeBooks
 
             if (numberOfStudents < 5)
             {
-                throw new System.InvalidOperationException("Ranked grading requires at least five students with grades to properly calculate a student's overall grade.");
+                //throw new System.InvalidOperationException("Ranked grading requires at least five students with grades to properly calculate a student's overall grade.");
+                Console.WriteLine("Ranked grading requires at least five students with grades to properly calculate a student's overall grade.");
+                return;
             }
 
             base.CalculateStatistics();
@@ -29,10 +32,12 @@ namespace GradeBook.GradeBooks
 
             if (numberOfStudents < 5)
             {
-                throw new System.InvalidOperationException("Ranked grading requires at least five students with grades to properly calculate a student's overall grade.");
+                //throw new System.InvalidOperationException("Ranked grading requires at least five students with grades to properly calculate a student's overall grade.");
+                Console.WriteLine("Ranked grading requires at least five students with grades to properly calculate a student's overall grade.");
+                return;
             }
 
-            base.CalculateStatistics();
+            base.CalculateStudentStatistics(name);
         }
 
         public override char GetLetterGrade(double averageGrade)
